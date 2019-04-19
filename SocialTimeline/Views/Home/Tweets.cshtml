@@ -1,0 +1,41 @@
+﻿@model IEnumerable<SocialTimeline.Models.Tweet>
+
+@{
+    ViewBag.Title = "Tweets by JarnoDev";
+}
+
+@if (Model != null)
+{
+    <h2>Tweets</h2>
+    <br />
+    <p>To request tweets from another account, type the display name of the account behind the URL, like this: /Tweets/nos</p>
+    <table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th style="font-weight:bold">
+                    @Html.DisplayFor(modelItem => item.TwitterUser.name)
+                    &nbsp;&#64;
+                    @Html.DisplayFor(modelItem => item.TwitterUser.screen_name)
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Message)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+
+    ViewBag.id = "";
+    Response.Redirect("/Tweets/");
+
+}
